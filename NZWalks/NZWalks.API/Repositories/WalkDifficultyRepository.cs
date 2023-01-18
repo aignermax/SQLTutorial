@@ -30,7 +30,7 @@ namespace NZWalks.API.Repositories
 
         }
 
-        public async Task<WalkDifficulty> GetWalkDifficultyAsync(Guid id)
+        public async Task<WalkDifficulty> GetAsync(Guid id)
         {
             return await nZWalksDbContext.WalkDifficulty.FirstOrDefaultAsync(x => x.Id == id );
         }
@@ -42,7 +42,7 @@ namespace NZWalks.API.Repositories
 
         public async Task<WalkDifficulty> UpdateWalkDifficultyAsync(Guid id , WalkDifficulty walkDifficulty)
         {
-            var walkDifficultyDatabase = await GetWalkDifficultyAsync(id);
+            var walkDifficultyDatabase = await GetAsync(id);
             if (walkDifficultyDatabase == null) return null;
             walkDifficultyDatabase.Code = walkDifficulty.Code;
             await nZWalksDbContext.SaveChangesAsync();
