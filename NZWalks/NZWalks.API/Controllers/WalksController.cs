@@ -90,24 +90,7 @@ namespace NZWalks.API.Controllers
         #region Private methods
         private async Task<bool> ValidateAddWalkAsync(Models.DTO.AddWalkRequest addWalkRequest)
         {
-            if (addWalkRequest == null)
-            {
-                ModelState.AddModelError(nameof(addWalkRequest),
-                    $"{nameof(addWalkRequest)} cannot be empty.");
-            }
-
-            if( string.IsNullOrWhiteSpace(addWalkRequest.Name) )
-            {
-                ModelState.AddModelError(nameof(addWalkRequest.Name),
-                    $"{nameof(addWalkRequest.Name)} is required.");
-            }
-
-            if (addWalkRequest.Length <0)
-            {
-                ModelState.AddModelError(nameof(addWalkRequest.Length),
-                    $"{nameof(addWalkRequest.Length)} cannot be smaller than 0.");
-            }
-
+            
             var region = await regionRepository.GetAsync(addWalkRequest.RegionId);
             if (region == null)
             {
@@ -132,24 +115,6 @@ namespace NZWalks.API.Controllers
 
         private async Task<bool> ValidateUpdateWalkAsync(Models.DTO.UpdateWalkRequest updateWalkRequest)
         {
-            if (updateWalkRequest == null)
-            {
-                ModelState.AddModelError(nameof(updateWalkRequest),
-                    $"{nameof(updateWalkRequest)} cannot be empty.");
-            }
-
-            if (string.IsNullOrWhiteSpace(updateWalkRequest.Name))
-            {
-                ModelState.AddModelError(nameof(updateWalkRequest.Name),
-                    $"{nameof(updateWalkRequest.Name)} is required.");
-            }
-
-            if (updateWalkRequest.Length < 0)
-            {
-                ModelState.AddModelError(nameof(updateWalkRequest.Length),
-                    $"{nameof(updateWalkRequest.Length)} cannot be smaller than 0.");
-            }
-
             var region = await regionRepository.GetAsync(updateWalkRequest.RegionId);
             if (region == null)
             {
